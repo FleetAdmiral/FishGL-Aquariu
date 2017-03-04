@@ -1,0 +1,41 @@
+# Blender MTL File: 'None'
+# Material Count: 4
+
+newmtl Default.001
+Ns 90.196078
+Ka 0.000000 0.000000 0.000000
+Kd 0.409600 0.409600 0.409600
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd /Users/pranavnair97/Desktop/FolderToRuleThemAll/Semester_4/Graphics/Assignment_3/NewOne/webgl-obj-loader-gh-pages/textures/stone_wall.png
+
+newmtl Default.001_stone_wall.png
+Ns 90.196078
+Ka 0.000000 0.000000 0.000000
+Kd 0.409600 0.409600 0.409600
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd /Users/pranavnair97/Desktop/FolderToRuleThemAll/Semester_4/Graphics/Assignment_3/NewOne/webgl-obj-loader-gh-pages/textures/stone_wall.png
+
+newmtl Default.002
+Ns 90.196078
+Ka 0.000000 0.000000 0.000000
+Kd 0.409600 0.409600 0.409600
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl Default.003
+Ns 90.196078
+Ka 0.000000 0.000000 0.000000
+Kd 0.409600 0.409600 0.409600
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd /Users/pranavnair97/Desktop/FolderToRuleThemAll/Semester_4/Graphics/Assignment_3/NewOne/webgl-obj-loader-gh-pages/textures/room_floor.jpg
