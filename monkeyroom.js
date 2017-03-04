@@ -106,10 +106,11 @@ function drawMonkeyRoom(){
   setUniforms();
 
   mvPushMatrix();
-
+    mvPushMatrix();
     mat4.scale( modelMatrix, [2,2,2] )
     mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
     drawObject( app.models.room_walls, 0 );
+    mvPopMatrix();
     // if( !app.breakWalls ){
     //   drawObject( app.models.room_wall_unbroken, 0 );
     // }
@@ -127,13 +128,13 @@ function drawMonkeyRoom(){
           // console.log(app.)
           mat4.scale(modelMatrix,[i.size,i.size,i.size]);
           mat4.translate( modelMatrix, [i.x, i.y, i.z] );
-          mat4.rotate( modelMatrix, degToRad( 90-i.theta ), [0,1,0] ); 
+          mat4.rotate( modelMatrix, degToRad( 90-i.theta ), [0,1,0] );
           mat4.rotate( modelMatrix, degToRad( -i.phi ), [1,0,0] );
           // console.log([i.x, i.y, i.z]);
           app.mvMatrix = mat4.identity();
           mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
           // mat4.rotate( app.mvMatrix, degToRad( i.phi ), [1,0,0] );
-          i.y += i.v*Math.sin(degToRad(i.phi))  
+          i.y += i.v*Math.sin(degToRad(i.phi))
           i.x += i.v*Math.cos(degToRad(i.phi))*Math.cos(degToRad(i.theta))
           i.z += i.v*Math.cos(degToRad(i.phi))*Math.sin(degToRad(i.theta))
           if(i.phi > 30){
@@ -147,7 +148,7 @@ function drawMonkeyRoom(){
           {
             i.theta -= dirchangespeed
           }
-          
+
           if(i.y >= 2.5)
           {
             i.phi -= dirchangespeed/2
@@ -164,8 +165,8 @@ function drawMonkeyRoom(){
           //   i.theta += 3*Math.random()
           // if(Math.random() > 0.90)
           //   i.theta += 6*Math.random() - 3
-          
-          
+
+
           console.log([i.x, i.y, i.z])
           console.log(i.phi)
           gl.uniform3fv( shaderProgram.lightSpecularColor, lightIntesity( 0.05, 0.0, 0.0, 0.01 ) );
@@ -174,7 +175,7 @@ function drawMonkeyRoom(){
         }
         // console.log(i); // logs 3, 5, 7
       }
-      
+
 
       mvPushMatrix();
         mat4.translate( app.mvMatrix, [0,2,0] );
