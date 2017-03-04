@@ -104,13 +104,20 @@ function drawMonkeyRoom(){
   gl.uniform3fv( shaderProgram.lightVector, app.lightVector );
 
   setUniforms();
-
+  mvPushMatrix();
     mvPushMatrix();
     mat4.scale( modelMatrix, [2,2,2] )
     mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
     drawObject( app.models.room_walls, 0 );
     drawObject( app.models.room_floor, 0 );
     drawObject( app.models.room_ceiling, 0 );
+    mvPopMatrix();
+
+    mvPushMatrix();
+    mat4.scale( modelMatrix, [0.01,0.01,0.01] );
+    mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
+    drawObject( app.models.seaweed, 50, [1,1,1]);
+    mat4.scale( modelMatrix, [100,100,100] );
     mvPopMatrix();
     // if( !app.breakWalls ){
     //   drawObject( app.models.room_wall_unbroken, 0 );

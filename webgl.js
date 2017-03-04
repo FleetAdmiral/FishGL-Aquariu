@@ -52,6 +52,7 @@ window.onload = function(){
       'suzanne': 'models/suzanne12.obj',
       'pedestal': 'models/pedestal.obj',
       'boulder': 'models/boulder.obj',
+      'seaweed': 'models/seaweed.obj',
     },
     webGLStart
   );
