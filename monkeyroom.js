@@ -2,9 +2,10 @@ app.monkeyPositionTimer = 0;
 
 function floatMonkey(){
   app.monkeyPositionTimer = app.monkeyPositionTimer > Math.PI * 2 ? 0 : app.monkeyPositionTimer + 0.05;
-  app.monkey.position[Y] = Math.sin(app.monkeyPositionTimer)/1000 ;
+  app.monkey.position[Y] = Math.sin( app.monkeyPositionTimer )/5+1.3;
+  app.monkey.position[X] = Math.cos(app.monkeyPositionTimer)/5;
 }
-app.monkeyRoomCollision = 3.95;
+app.monkeyRoomCollision = 6;
 function roomCollisionCheck(){
   if( app.camera.position[X] > app.monkeyRoomCollision ){
     app.camera.position[X] = app.monkeyRoomCollision
@@ -94,37 +95,34 @@ function drawMonkeyRoom(){
   mat3.transpose(normalMatrix);
   mat3.multiplyVec3( normalMatrix, app.lightVectorStatic, app.lightVector )
   mat4.multiplyVec3( app.mvMatrix, app.lightLocationStatic, app.lightLocation )
-  gl.uniform3fv( shaderProgram.lightLocation, app.lightLocation );
+  gl.uniform3fv( shaderProgram.lightLocation, [0,2,2] );
   gl.uniform3fv( shaderProgram.lightVector, app.lightVector );
 
   setUniforms();
 
   mvPushMatrix();
-    mat4.scale( app.mvMatrix, [2,2,2] );
+    mat4.scale( app.mvMatrix, [2,2,2] )
     drawObject( app.models.room_walls, 0 );
-    //if( !app.breakWalls ){
-      //drawObject( app.models.room_wall_unbroken, 0 );
-    //}
-    //drawObject( app.models.room_floor, 0 );
-    //drawObject( app.models.room_ceiling, 0 );
+    if( !app.breakWalls ){
+      drawObject( app.models.room_wall_unbroken, 0 );
+    }
+    drawObject( app.models.room_floor, 0 );
+    drawObject( app.models.room_ceiling, 0 );
     //drawObject( app.models.pedestal, 50, [0.75,0.75,0.75,1.0] );
 
       mvPushMatrix();
-        mat4.scale(app.mvMatrix,[0.1,0.1,0.1] );
+        mat4.scale(app.mvMatrix,[0.1,0.1,0.1]);
         mat4.rotate( app.mvMatrix, degToRad( 180 ), [0,1,0] );
-        app.monkey.position[Y] = app.monkey.position[Y] + 0.1;
-        //mat4.translate(app.mvMatrix, [0,1.5,0] );
-        mat4.translate( app.mvMatrix, app.monkey.position);
-        mat4.translate(app.mvMatrix, [0,1.5,0] );
-        gl.uniform3fv( shaderProgram.lightSpecularColor, lightIntesity( 0, 0, 0, 0 ) );
-        drawObject( app.models.suzanne, 100, [0.5,0.5,0.22,1.0] );
+        mat4.translate( app.mvMatrix, app.monkey.position );
+        gl.uniform3fv( shaderProgram.lightSpecularColor, lightIntesity( 0.05, 0.0, 0.0, 0.01 ) );
+        drawObject( app.models.suzanne, 100, [0.0,0.0,0.0,0.0] );
       mvPopMatrix();
 
       mvPushMatrix();
         mat4.translate( app.mvMatrix, [0,2,0] );
-        gl.uniform3fv( shaderProgram.ambientColorUniform, lightIntesity( 0.5, 0.5,0.5,0.5 ) );
+        gl.uniform3fv( shaderProgram.ambientColorUniform, lightIntesity( 2.0, 1,1,1 ) );
         drawObject( app.models.skylight, 0, [0.53,0.81,0.98,1.0] );
-        gl.uniform3fv( shaderProgram.ambientColorUniform, lightIntesity( app.ambientIntensity, 1,1,1 ) );
+        gl.uniform3fv( shaderProgram.ambientColorUniform, lightIntesity( app.ambientIntensity, 0.3,0.3,0.3 ) );
       mvPopMatrix();
 
     drawObject( app.models.room_tunnel_ceiling, 0 );
@@ -136,4 +134,5 @@ function drawMonkeyRoom(){
     app.animations.currentAnimation();
   }
 }
+
 app.drawScene = drawMonkeyRoom;

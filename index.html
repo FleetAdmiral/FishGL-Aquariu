@@ -66,7 +66,7 @@
     }
 
     const Spotlight flashlight = Spotlight(vec3(0.0, 0.0, 0.0),
-                                           vec3(0.0, 0.0, 0.0),
+                                           vec3(0.0, 0.0, -1.0),
                                            2.0,
                                            M_PI / 8.0,
                                            M_PI / 180.0);
@@ -78,14 +78,14 @@
                                          M_PI / 4.0,
                                          M_PI / 90.0);
       Pointlight foglight = Pointlight(vec3(0.0, 0.0, 0.0),
-                                       2.0);
-      vec2 lights = vec2(0.0, 0.0);
+                                       5.0);
+      vec2 lights = vec2(0.3, 0.3);
       lights += spotlight(ceilinglight, vPosition.xyz, vTransformedNormal);
       lights += float(uHasFlashlight) * spotlight(flashlight, vPosition.xyz, vTransformedNormal);
       lights += pointlight(foglight, vPosition.xyz, vTransformedNormal);
 
       vec4 color = mix(uColor, texture2D(uSampler, vec2(vTextureCoord.s, vTextureCoord.t)), float(uHasTexure));
-      vec3 diffuse = color.rgb; //* lights[0];
+      vec3 diffuse = color.rgb* lights[0]+vec3(0.0,0.0,0.15);
       vec3 specular = uLightSpecularColor * lights[1]*uMaterialShininess;
       gl_FragColor = vec4(diffuse + specular, 1.0);
     }
@@ -181,10 +181,9 @@
 
 <body style='padding:0; margin:0;'>
 
-  <div style='padding-left:26%;padding-top: 7%; width:50%;'>
+  <div style='float:left; width:50%;'>
     <canvas id="mycanvas" style="border: none;" width="500" height="500"></canvas><br />
   </div>
-
 </body>
 
 </html>
