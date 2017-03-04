@@ -116,7 +116,7 @@ function drawMonkeyRoom(){
     mvPushMatrix();
     mat4.scale( modelMatrix, [0.01,0.01,0.01] );
     mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
-    drawObject( app.models.seaweed, 50, [0,1,0]);
+    drawObject( app.models.seaweed, 0, [0,1,0]);
     mat4.scale( modelMatrix, [100,100,100] );
     mvPopMatrix();
 
@@ -125,7 +125,7 @@ function drawMonkeyRoom(){
     mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
     mat4.translate( modelMatrix, [4,0,4] );
     mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
-    drawObject( app.models.seaweed, 50, [0,1,0]);
+    drawObject( app.models.seaweed, 0, [0,1,0]);
     mat4.scale( modelMatrix, [100,100,100] );
     mvPopMatrix();
 
@@ -134,10 +134,18 @@ function drawMonkeyRoom(){
     mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
     mat4.translate( modelMatrix, [2,0,4] );
     mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
-    drawObject( app.models.seaweed, 50, [0,1,0]);
+    drawObject( app.models.seaweed, 0, [0,1,0]);
     mat4.scale( modelMatrix, [100,100,100] );
     mvPopMatrix();
 
+    mvPushMatrix();
+    mat4.scale( modelMatrix, [0.01,0.01,0.01] );
+    mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
+    mat4.translate( modelMatrix, [14,0,4] );
+    mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
+    drawObject( app.models.pebble, 100, [0,1,1]);
+    mat4.scale( modelMatrix, [100,100,100] );
+    mvPopMatrix();
     // if( !app.breakWalls ){
     //   drawObject( app.models.room_wall_unbroken, 0 );
     // }

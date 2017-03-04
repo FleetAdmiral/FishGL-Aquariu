@@ -53,6 +53,7 @@ window.onload = function(){
       'pedestal': 'models/pedestal.obj',
       'boulder': 'models/boulder.obj',
       'seaweed': 'models/seaweed.obj',
+      'pebble': 'models/pebble.obj',
     },
     webGLStart
   );
