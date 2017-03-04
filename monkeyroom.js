@@ -215,7 +215,7 @@ function drawMonkeyRoom(){
             i.phi = -30
           }
           var dirchangespeed = 1
-          if(Math.abs(i.x) >= 10 || Math.abs(i.z) >= 10)
+          if(Math.abs(i.x) >= 8 || Math.abs(i.z) >= 8)
           {
             i.theta -= dirchangespeed
           }
@@ -230,21 +230,49 @@ function drawMonkeyRoom(){
           }
           if(i.size < 0.1)
           {
-            i.size += 0.0001
+            i.size += 0.00002
           }
-          // if(Math.random() > 0.90)
-          //   i.theta += 3*Math.random()
-          // if(Math.random() > 0.90)
-          //   i.theta += 6*Math.random() - 3
-
-
-          console.log([i.x, i.y, i.z])
-          console.log(i.phi)
+          // if(fish.indexOf(i) == 1)
+          // {
+          //   console.log(i);
+          // }
           gl.uniform3fv( shaderProgram.lightSpecularColor, lightIntesity( 0.05, 0.0, 0.0, 0.01 ) );
-          drawObject( app.models.suzanne, 100, [0.0,0.0,0.0,0.0] );
+          drawObject( app.models.fish1, 100, [0.0,0.0,0.0,0.0] );
           mvPopMatrix();
         }
-        // console.log(i); // logs 3, 5, 7
+      }
+      for (let i of eggs) {
+        mvPushMatrix();
+        mat4.identity(modelMatrix);
+        mat4.scale( modelMatrix, [2,2,2] )
+        mat4.scale(modelMatrix,[0.02,0.02,0.02]);
+        mat4.translate( modelMatrix, [i.x, i.y, i.z] );
+        console.log([i.x, i.y, i.z]);
+        app.mvMatrix = mat4.identity();
+        mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
+
+        if(i.y > 0.2){
+          i.x -= i.vx
+          i.y -= i.vy
+          i.z -= i.vz
+        }
+        else
+        {
+          index = eggs.indexOf(i);
+          console.log('egg reached!');
+          // console.log(fish.length);
+          fish.push({x : i.x, y: 2, z: i.z, v:0.05, size:0.025, type:i.type, theta:180, phi:10});
+          // fish.push({x : 1, y: 1, z:1, v:0.05, size:0.025, type:0, theta:30, phi:10});
+          console.log(i);
+          if (index > -1) {
+            eggs.splice(index, 1);
+          }
+        }
+        gl.uniform3fv( shaderProgram.lightSpecularColor, lightIntesity( 0.05, 0.0, 0.0, 0.01 ) );
+        // console.log(i.y);
+        drawObject( app.models.egg, 100, [1.0,1.0,1.0,1.0] );
+        mvPopMatrix();
+        
       }
 
 
