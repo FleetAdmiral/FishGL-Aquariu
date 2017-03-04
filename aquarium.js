@@ -108,9 +108,12 @@ function drawaquarium(){
     mvPushMatrix();
     mat4.scale( modelMatrix, [2,2,2] )
     mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
-    drawObject( app.models.room_walls, 0 );
     drawObject( app.models.room_floor, 0 );
-    drawObject( app.models.room_ceiling, 0 );
+    if(app.cameramode != 2)
+    {
+      drawObject( app.models.room_walls, 0 );
+      drawObject( app.models.room_ceiling, 0 );
+    }
     mvPopMatrix();
 
     mvPushMatrix();
@@ -137,57 +140,6 @@ function drawaquarium(){
     drawObject( app.models.seaweed, 0, [0,1,0]);
     mat4.scale( modelMatrix, [100,100,100] );
     mvPopMatrix();
-
-    // mvPushMatrix();
-    // mat4.scale( modelMatrix, [0.01,0.01,0.01] );
-    // mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
-    // mat4.translate( modelMatrix, [2,5,4] );
-    // mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
-    // drawObject( app.models.codfish, 0);
-    // mat4.scale( modelMatrix, [100,100,100] );
-    // mvPopMatrix();
-
-    // mvPushMatrix();
-    // mat4.scale( modelMatrix, [0.01,0.01,0.01] );
-    // mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
-    // mat4.translate( modelMatrix, [2,8,4] );
-    // mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
-    // drawObject( app.models.orca, 0);
-    // mat4.scale( modelMatrix, [100,100,100] );
-    // mvPopMatrix();
-
-    // mvPushMatrix();
-    // mat4.scale( modelMatrix, [0.01,0.01,0.01] );
-    // mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
-    // mat4.translate( modelMatrix, [2,10,4] );
-    // mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
-    // drawObject( app.models.goldfish, 0);
-    // mat4.scale( modelMatrix, [100,100,100] );
-    // mvPopMatrix();
-
-
-    // mvPushMatrix();
-    // mat4.scale( modelMatrix, [0.01,0.01,0.01] );
-    // mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
-    // mat4.translate( modelMatrix, [2,200,4] );
-    // mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
-    // drawObject( app.models.goldfish, 0);
-    // mat4.scale( modelMatrix, [100,100,100] );
-    // mvPopMatrix();
-
-    // mvPushMatrix();
-    // mat4.scale( modelMatrix, [0.01,0.01,0.01] );
-    // mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
-    // mat4.translate( modelMatrix, [14,0,4] );
-    // mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
-    // drawObject( app.models.pebble, 0, [1,1,1]);
-    // mat4.scale( modelMatrix, [100,100,100] );
-    // mvPopMatrix();
-    // if( !app.breakWalls ){
-    //   drawObject( app.models.room_wall_unbroken, 0 );
-    // }
-
-    //drawObject( app.models.pedestal, 50, [0.75,0.75,0.75,1.0] );
 
       for (let i of fish) {
         if(i.type != -1)

@@ -146,7 +146,6 @@ function initTextures(){
   app.models.room_wall_broken.texture = app.models.room_walls.texture;
   app.models.room_wall_unbroken.texture = app.models.room_walls.texture;
   // app.models.room_tunnel_ceiling.texture = app.models.room_ceiling.texture;
-  app.models.boulder.texture = app.models.room_ceiling.texture;
   initTexture(app.models.seaweed, "textures/seaweed.jpg");
   initTexture(app.models.fish2, "textures/codfish.png");
   initTexture(app.models.fish3, "textures/goldfish.png");

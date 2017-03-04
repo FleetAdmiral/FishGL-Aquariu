@@ -91,10 +91,6 @@ var app = {};
   // monkey
   app.monkey = {};
   app.monkey.position = [0,0,0]
-  // boulder
-  app.boulder = {};
-  app.boulder.position = [0,0.245,-2.21];
-  app.boulder.rotation = 0;
   // animations
   app.animate = false;
   app.animations = {};
@@ -113,7 +109,6 @@ var app = {};
     // walls
     app.breakWalls = false;
     app.wallScale = 1;
-    app.animations.boulderCrashStartTime = 0;
     // turn around
     app.animations.turnAroundTime = 1; // framelength in seconds
     app.animations.turnAroundStartTime = 0;
