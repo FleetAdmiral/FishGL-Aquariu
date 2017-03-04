@@ -151,6 +151,7 @@ function initTextures(){
   initTexture(app.models.codfish, "textures/codfish.png");
     initTexture(app.models.goldfish, "textures/goldfish.png");
     initTexture(app.models.orca, "textures/orca.png");
+    initTexture(app.models.dolphin, "textures/dolphin.png")
   initTexture( app.particles, "textures/smoke.png" );
 
 }

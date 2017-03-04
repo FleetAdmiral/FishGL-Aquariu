@@ -159,6 +159,15 @@ function drawMonkeyRoom(){
     mvPushMatrix();
     mat4.scale( modelMatrix, [0.01,0.01,0.01] );
     mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
+    mat4.translate( modelMatrix, [2,15,4] );
+    mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
+    drawObject( app.models.dolphin, 0);
+    mat4.scale( modelMatrix, [100,100,100] );
+    mvPopMatrix();
+
+    mvPushMatrix();
+    mat4.scale( modelMatrix, [0.01,0.01,0.01] );
+    mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
     mat4.translate( modelMatrix, [2,10,4] );
     mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
     drawObject( app.models.goldfish, 0);
@@ -272,7 +281,7 @@ function drawMonkeyRoom(){
         // console.log(i.y);
         drawObject( app.models.egg, 100, [1.0,1.0,1.0,1.0] );
         mvPopMatrix();
-        
+
       }
 
 
