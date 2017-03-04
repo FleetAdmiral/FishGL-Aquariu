@@ -73,6 +73,11 @@ function createParticles( num, min, max, maxVector, maxTTL, particles ){
 }
 
 function drawMonkeyRoom(){
+  var viewMatrix = mat4.create();
+  mat4.identity(viewMatrix);
+  var modelMatrix = mat4.create();
+  mat4.identity(modelMatrix);
+
   floatMonkey();
   roomCollisionCheck();
   gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
@@ -83,40 +88,93 @@ function drawMonkeyRoom(){
 
   mat4.identity( app.mvMatrix )
   // camera position and rotations
-  mat4.rotate( app.mvMatrix, degToRad( app.camera.pitch ), [1,0,0] );
+  mat4.rotate( viewMatrix, degToRad( app.camera.pitch ), [1,0,0] );
   // account for pitch rotation and light down vector
-  mat4.rotate( app.mvMatrix, degToRad( app.camera.heading ), [0,1,0] );
-  mat4.translate( app.mvMatrix, app.camera.inversePosition );
+  mat4.rotate( viewMatrix, degToRad( app.camera.heading ), [0,1,0] );
+  mat4.translate( viewMatrix, app.camera.inversePosition );
 
   gl.useProgram( shaderProgram );
 
   var normalMatrix = mat3.create();
-  mat4.toInverseMat3(app.mvMatrix, normalMatrix);
+  mat4.toInverseMat3(viewMatrix, normalMatrix);
   mat3.transpose(normalMatrix);
   mat3.multiplyVec3( normalMatrix, app.lightVectorStatic, app.lightVector )
-  mat4.multiplyVec3( app.mvMatrix, app.lightLocationStatic, app.lightLocation )
+  mat4.multiplyVec3( viewMatrix, app.lightLocationStatic, app.lightLocation )
   gl.uniform3fv( shaderProgram.lightLocation, [0,2,2] );
   gl.uniform3fv( shaderProgram.lightVector, app.lightVector );
 
   setUniforms();
 
   mvPushMatrix();
-    mat4.scale( app.mvMatrix, [2,2,2] )
+
+    mat4.scale( modelMatrix, [2,2,2] )
+    mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
     drawObject( app.models.room_walls, 0 );
-    if( !app.breakWalls ){
-      drawObject( app.models.room_wall_unbroken, 0 );
-    }
+    // if( !app.breakWalls ){
+    //   drawObject( app.models.room_wall_unbroken, 0 );
+    // }
     drawObject( app.models.room_floor, 0 );
     drawObject( app.models.room_ceiling, 0 );
     //drawObject( app.models.pedestal, 50, [0.75,0.75,0.75,1.0] );
 
-      mvPushMatrix();
-        mat4.scale(app.mvMatrix,[0.1,0.1,0.1]);
-        mat4.rotate( app.mvMatrix, degToRad( 180 ), [0,1,0] );
-        mat4.translate( app.mvMatrix, app.monkey.position );
-        gl.uniform3fv( shaderProgram.lightSpecularColor, lightIntesity( 0.05, 0.0, 0.0, 0.01 ) );
-        drawObject( app.models.suzanne, 100, [0.0,0.0,0.0,0.0] );
-      mvPopMatrix();
+      for (let i of fish) {
+        if(i.type != -1)
+        {
+          mvPushMatrix();
+          mat4.identity(modelMatrix);
+          mat4.scale( modelMatrix, [2,2,2] )
+          // mat4.translate( app.mvMatrix, -app.camera.inversePosition );
+          // console.log(app.)
+          mat4.scale(modelMatrix,[i.size,i.size,i.size]);
+          mat4.translate( modelMatrix, [i.x, i.y, i.z] );
+          mat4.rotate( modelMatrix, degToRad( 90-i.theta ), [0,1,0] ); 
+          mat4.rotate( modelMatrix, degToRad( -i.phi ), [1,0,0] );
+          // console.log([i.x, i.y, i.z]);
+          app.mvMatrix = mat4.identity();
+          mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
+          // mat4.rotate( app.mvMatrix, degToRad( i.phi ), [1,0,0] );
+          i.y += i.v*Math.sin(degToRad(i.phi))  
+          i.x += i.v*Math.cos(degToRad(i.phi))*Math.cos(degToRad(i.theta))
+          i.z += i.v*Math.cos(degToRad(i.phi))*Math.sin(degToRad(i.theta))
+          if(i.phi > 30){
+            i.phi = 30
+          }
+          if(i.phi < -30){
+            i.phi = -30
+          }
+          var dirchangespeed = 1
+          if(Math.abs(i.x) >= 10 || Math.abs(i.z) >= 10)
+          {
+            i.theta -= dirchangespeed
+          }
+          
+          if(i.y >= 2.5)
+          {
+            i.phi -= dirchangespeed/2
+          }
+          if(i.y < 1.5)
+          {
+            i.phi += dirchangespeed/2
+          }
+          if(i.size < 0.1)
+          {
+            i.size += 0.0001
+          }
+          // if(Math.random() > 0.90)
+          //   i.theta += 3*Math.random()
+          // if(Math.random() > 0.90)
+          //   i.theta += 6*Math.random() - 3
+          
+          
+          console.log([i.x, i.y, i.z])
+          console.log(i.phi)
+          gl.uniform3fv( shaderProgram.lightSpecularColor, lightIntesity( 0.05, 0.0, 0.0, 0.01 ) );
+          drawObject( app.models.suzanne, 100, [0.0,0.0,0.0,0.0] );
+          mvPopMatrix();
+        }
+        // console.log(i); // logs 3, 5, 7
+      }
+      
 
       mvPushMatrix();
         mat4.translate( app.mvMatrix, [0,2,0] );
