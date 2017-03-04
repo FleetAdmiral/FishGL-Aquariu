@@ -54,6 +54,9 @@ window.onload = function(){
       'boulder': 'models/boulder.obj',
       'seaweed': 'models/seaweed.obj',
       'pebble': 'models/pebble.obj',
+      'codfish': 'models/codfish.obj',
+      'goldfish': 'models/goldfish.obj',
+      'orca': 'models/orca.obj',
     },
     webGLStart
   );
