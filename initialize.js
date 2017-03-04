@@ -139,7 +139,7 @@ function initTexture( object, url) {
 }
 
 function initTextures(){
-  initTexture( app.models.room_ceiling, "textures/stony_ground.jpg" );
+  initTexture( app.models.room_ceiling, "textures/stony_ground_4.jpg" );
   initTexture( app.models.room_walls, "textures/stone_wall.png" );
   initTexture( app.models.room_floor, "textures/room_floor.jpg" );
   app.models.room_tunnel_walls.texture = app.models.room_walls.texture;
