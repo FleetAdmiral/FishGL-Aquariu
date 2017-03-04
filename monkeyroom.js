@@ -105,17 +105,17 @@ function drawMonkeyRoom(){
 
   setUniforms();
 
-  mvPushMatrix();
     mvPushMatrix();
     mat4.scale( modelMatrix, [2,2,2] )
     mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
     drawObject( app.models.room_walls, 0 );
+    drawObject( app.models.room_floor, 0 );
+    drawObject( app.models.room_ceiling, 0 );
     mvPopMatrix();
     // if( !app.breakWalls ){
     //   drawObject( app.models.room_wall_unbroken, 0 );
     // }
-    drawObject( app.models.room_floor, 0 );
-    drawObject( app.models.room_ceiling, 0 );
+
     //drawObject( app.models.pedestal, 50, [0.75,0.75,0.75,1.0] );
 
       for (let i of fish) {
