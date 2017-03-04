@@ -7,16 +7,21 @@ var gl;
 // the canvas we're working with
 var canvas;
 
-var fish = [{x:0, y:1, z:5, v:0.05, size:0.1, type:0, theta:180, phi:10}];
-// var fish = [{x:0, y:1, z:10, v:0.05, size:0.1, type:0, theta:180, phi:10}, 
-//             {x:0, y:1, z:0, v:0.05, size:0.1, type:0,  theta:-120, phi:15},
-//             {x:0, y:1, z:0, v:0.05, size:0.02, type:0,  theta:15, phi:0},
-//             {x:0, y:1, z:0, v:0.05, size:0.05, type:0,  theta:90, phi:20}];
+// var fish = [{x:0, y:1, z:5, v:0.05, size:0.1, type:0, theta:180, phi:10}];
+var fish = [{x:0, y:1, z:10, v:0.05, size:0.1, type:0, theta:180, phi:10}, 
+            {x:0, y:1, z:0, v:0.05, size:0.1, type:1,  theta:-120, phi:15},
+            {x:0, y:1, z:0, v:0.05, size:0.1, type:2,  theta:15, phi:0},
+            {x:0, y:1, z:0, v:0.05, size:0.1, type:3,  theta:90, phi:20},
+            {x:0, y:1, z:0, v:0.05, size:0.1, type:4,  theta:10, phi:20}];
             // {x:0, y:0, z:0, v:0, vy:0, vz:0, size:0, type:-1},
             // {x:0, y:0, z:0, v:0, vy:0, vz:0, size:0, type:-1},
             // {x:0, y:0, z:0, v:0, vy:0, vz:0, size:0, type:-1}]
 var fishselect = 0;
 var nfish = fish.length;
+var codfish_coeff = 0.5
+var goldfish_coeff = 0.2
+var orca_coeff = 1
+var dolphin_coeff = 1
 
 var eggs = [];
 
