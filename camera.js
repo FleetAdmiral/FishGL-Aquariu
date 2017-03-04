@@ -97,9 +97,9 @@ function cameraKeyDownHandler( e ){
     // fishselect++
   }
   // e
-  if( e.which === 69  && !app.animate && vec3.length( app.camera.position ) < 1 ){
-    startAnimations();
-  }
+  // if( e.which === 69  && !app.animate && vec3.length( app.camera.position ) < 1 ){
+  //   startAnimations();
+  // }
 }
 
 function cameraKeyUpHandler( e ){

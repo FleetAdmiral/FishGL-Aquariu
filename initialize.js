@@ -46,7 +46,7 @@ function getShader(gl, id) {
 }
 
 function initShaders() {
-  initParticleShaders();
+  // initParticleShaders();
 
   var fragmentShader = getShader(gl, "shader-fs");
   var vertexShader = getShader(gl, "shader-vs");
@@ -87,33 +87,33 @@ function initShaders() {
   shaderProgram.lightDiffuseColor = gl.getUniformLocation(shaderProgram, "uLightDiffuseColor");
 }
 
-function initParticleShaders() {
-  var fragmentShader = getShader(gl, "particle-shader-fs");
-  var vertexShader = getShader(gl, "particle-shader-vs");
-
-  particleShaderProgram = gl.createProgram();
-  gl.attachShader(particleShaderProgram, vertexShader);
-  gl.attachShader(particleShaderProgram, fragmentShader);
-  gl.linkProgram(particleShaderProgram);
-
-  if (!gl.getProgramParameter(particleShaderProgram, gl.LINK_STATUS)) {
-    alert("Could not initialise shaders");
-  }
-
-  particleShaderProgram.particlePosition = gl.getAttribLocation(particleShaderProgram, "aParticlePosition");
-  gl.enableVertexAttribArray(particleShaderProgram.particlePosition);
-
-  particleShaderProgram.particleVector = gl.getAttribLocation(particleShaderProgram, "aParticleVector");
-  gl.enableVertexAttribArray(particleShaderProgram.particleVector);
-
-  particleShaderProgram.particleTTL = gl.getAttribLocation(particleShaderProgram, "aParticleTTL");
-  gl.enableVertexAttribArray(particleShaderProgram.particleTTL);
-
-  particleShaderProgram.time = gl.getUniformLocation(particleShaderProgram, "time");
-  particleShaderProgram.samplerUniform = gl.getUniformLocation(particleShaderProgram, "uSampler");
-  particleShaderProgram.pMatrixUniform = gl.getUniformLocation(particleShaderProgram, "uPMatrix");
-  particleShaderProgram.mvMatrixUniform = gl.getUniformLocation(particleShaderProgram, "uMVMatrix");
-}
+// function initParticleShaders() {
+//   var fragmentShader = getShader(gl, "particle-shader-fs");
+//   var vertexShader = getShader(gl, "particle-shader-vs");
+//
+//   particleShaderProgram = gl.createProgram();
+//   gl.attachShader(particleShaderProgram, vertexShader);
+//   gl.attachShader(particleShaderProgram, fragmentShader);
+//   gl.linkProgram(particleShaderProgram);
+//
+//   if (!gl.getProgramParameter(particleShaderProgram, gl.LINK_STATUS)) {
+//     alert("Could not initialise shaders");
+//   }
+//
+//   particleShaderProgram.particlePosition = gl.getAttribLocation(particleShaderProgram, "aParticlePosition");
+//   gl.enableVertexAttribArray(particleShaderProgram.particlePosition);
+//
+//   particleShaderProgram.particleVector = gl.getAttribLocation(particleShaderProgram, "aParticleVector");
+//   gl.enableVertexAttribArray(particleShaderProgram.particleVector);
+//
+//   particleShaderProgram.particleTTL = gl.getAttribLocation(particleShaderProgram, "aParticleTTL");
+//   gl.enableVertexAttribArray(particleShaderProgram.particleTTL);
+//
+//   particleShaderProgram.time = gl.getUniformLocation(particleShaderProgram, "time");
+//   particleShaderProgram.samplerUniform = gl.getUniformLocation(particleShaderProgram, "uSampler");
+//   particleShaderProgram.pMatrixUniform = gl.getUniformLocation(particleShaderProgram, "uPMatrix");
+//   particleShaderProgram.mvMatrixUniform = gl.getUniformLocation(particleShaderProgram, "uMVMatrix");
+// }
 
 function handleLoadedTexture(texture) {
   gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
@@ -142,11 +142,12 @@ function initTextures(){
   initTexture( app.models.room_ceiling, "textures/stony_ground_4.jpg" );
   initTexture( app.models.room_walls, "textures/stone_wall.png" );
   initTexture( app.models.room_floor, "textures/room_floor.jpg" );
-  app.models.room_tunnel_walls.texture = app.models.room_walls.texture;
+  // app.models.room_tunnel_walls.texture = app.models.room_walls.texture;
   app.models.room_wall_broken.texture = app.models.room_walls.texture;
   app.models.room_wall_unbroken.texture = app.models.room_walls.texture;
-  app.models.room_tunnel_ceiling.texture = app.models.room_ceiling.texture;
+  // app.models.room_tunnel_ceiling.texture = app.models.room_ceiling.texture;
   app.models.boulder.texture = app.models.room_ceiling.texture;
+  initTexture(app.models.seaweed, "textures/seaweed.png");
   initTexture( app.particles, "textures/smoke.png" );
 }
 
@@ -161,5 +162,5 @@ function initBuffers() {
   }
   app.models.skylight = {};
   app.models.skylight.mesh = app.models.room_floor.mesh;
-  createParticles( 100000, app.particles.min, app.particles.max, app.particles.maxVector, app.particles.TTL, app.particles );
+  // createParticles( 100000, app.particles.min, app.particles.max, app.particles.maxVector, app.particles.TTL, app.particles );
 }
