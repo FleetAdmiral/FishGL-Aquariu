@@ -116,7 +116,7 @@ function drawMonkeyRoom(){
     mvPushMatrix();
     mat4.scale( modelMatrix, [0.01,0.01,0.01] );
     mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
-    drawObject( app.models.seaweed, 50, [1,1,1]);
+    drawObject( app.models.seaweed, 50, [0,1,0]);
     mat4.scale( modelMatrix, [100,100,100] );
     mvPopMatrix();
     // if( !app.breakWalls ){
