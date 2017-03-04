@@ -50,15 +50,16 @@ window.onload = function(){
       'room_wall_broken': 'models/room_wall_broken.obj',
       'room_wall_unbroken': 'models/room_wall_unbroken.obj',
       'fish1': 'models/fish1.obj',
+      'fish2': 'models/codfish.obj',
+      'fish3': 'models/goldfish.obj',
+      'fish4': 'models/orca.obj',
+      'fish5': 'models/dolphin.obj',
       'pedestal': 'models/pedestal.obj',
       'boulder': 'models/boulder.obj',
       'seaweed': 'models/seaweed.obj',
       'egg': 'models/egg.obj',
       'pebble': 'models/pebble.obj',
-      'codfish': 'models/codfish.obj',
-      'goldfish': 'models/goldfish.obj',
-      'orca': 'models/orca.obj',
-      'dolphin': 'models/dolphin.obj',
+
     },
     webGLStart
   );

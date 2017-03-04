@@ -148,10 +148,10 @@ function initTextures(){
   // app.models.room_tunnel_ceiling.texture = app.models.room_ceiling.texture;
   app.models.boulder.texture = app.models.room_ceiling.texture;
   initTexture(app.models.seaweed, "textures/seaweed.jpg");
-  initTexture(app.models.codfish, "textures/codfish.png");
-    initTexture(app.models.goldfish, "textures/goldfish.png");
-    initTexture(app.models.orca, "textures/orca.png");
-    initTexture(app.models.dolphin, "textures/dolphin.png")
+  initTexture(app.models.fish2, "textures/codfish.png");
+  initTexture(app.models.fish3, "textures/goldfish.png");
+  initTexture(app.models.fish4, "textures/orca.png");
+  initTexture(app.models.fish5, "textures/dolphin.png");
   initTexture( app.particles, "textures/smoke.png" );
 
 }

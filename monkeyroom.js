@@ -138,60 +138,51 @@ function drawMonkeyRoom(){
     mat4.scale( modelMatrix, [100,100,100] );
     mvPopMatrix();
 
-    mvPushMatrix();
-    mat4.scale( modelMatrix, [0.01,0.01,0.01] );
-    mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
-    mat4.translate( modelMatrix, [2,5,4] );
-    mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
-    drawObject( app.models.codfish, 0);
-    mat4.scale( modelMatrix, [100,100,100] );
-    mvPopMatrix();
+    // mvPushMatrix();
+    // mat4.scale( modelMatrix, [0.01,0.01,0.01] );
+    // mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
+    // mat4.translate( modelMatrix, [2,5,4] );
+    // mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
+    // drawObject( app.models.codfish, 0);
+    // mat4.scale( modelMatrix, [100,100,100] );
+    // mvPopMatrix();
 
-    mvPushMatrix();
-    mat4.scale( modelMatrix, [0.01,0.01,0.01] );
-    mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
-    mat4.translate( modelMatrix, [2,8,4] );
-    mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
-    drawObject( app.models.orca, 0);
-    mat4.scale( modelMatrix, [100,100,100] );
-    mvPopMatrix();
+    // mvPushMatrix();
+    // mat4.scale( modelMatrix, [0.01,0.01,0.01] );
+    // mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
+    // mat4.translate( modelMatrix, [2,8,4] );
+    // mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
+    // drawObject( app.models.orca, 0);
+    // mat4.scale( modelMatrix, [100,100,100] );
+    // mvPopMatrix();
 
-    mvPushMatrix();
-    mat4.scale( modelMatrix, [0.01,0.01,0.01] );
-    mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
-    mat4.translate( modelMatrix, [2,15,4] );
-    mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
-    drawObject( app.models.dolphin, 0);
-    mat4.scale( modelMatrix, [100,100,100] );
-    mvPopMatrix();
-
-    mvPushMatrix();
-    mat4.scale( modelMatrix, [0.01,0.01,0.01] );
-    mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
-    mat4.translate( modelMatrix, [2,10,4] );
-    mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
-    drawObject( app.models.goldfish, 0);
-    mat4.scale( modelMatrix, [100,100,100] );
-    mvPopMatrix();
+    // mvPushMatrix();
+    // mat4.scale( modelMatrix, [0.01,0.01,0.01] );
+    // mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
+    // mat4.translate( modelMatrix, [2,10,4] );
+    // mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
+    // drawObject( app.models.goldfish, 0);
+    // mat4.scale( modelMatrix, [100,100,100] );
+    // mvPopMatrix();
 
 
-    mvPushMatrix();
-    mat4.scale( modelMatrix, [0.01,0.01,0.01] );
-    mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
-    mat4.translate( modelMatrix, [2,200,4] );
-    mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
-    drawObject( app.models.goldfish, 0);
-    mat4.scale( modelMatrix, [100,100,100] );
-    mvPopMatrix();
+    // mvPushMatrix();
+    // mat4.scale( modelMatrix, [0.01,0.01,0.01] );
+    // mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
+    // mat4.translate( modelMatrix, [2,200,4] );
+    // mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
+    // drawObject( app.models.goldfish, 0);
+    // mat4.scale( modelMatrix, [100,100,100] );
+    // mvPopMatrix();
 
-    mvPushMatrix();
-    mat4.scale( modelMatrix, [0.01,0.01,0.01] );
-    mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
-    mat4.translate( modelMatrix, [14,0,4] );
-    mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
-    drawObject( app.models.pebble, 0, [1,1,1]);
-    mat4.scale( modelMatrix, [100,100,100] );
-    mvPopMatrix();
+    // mvPushMatrix();
+    // mat4.scale( modelMatrix, [0.01,0.01,0.01] );
+    // mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
+    // mat4.translate( modelMatrix, [14,0,4] );
+    // mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
+    // drawObject( app.models.pebble, 0, [1,1,1]);
+    // mat4.scale( modelMatrix, [100,100,100] );
+    // mvPopMatrix();
     // if( !app.breakWalls ){
     //   drawObject( app.models.room_wall_unbroken, 0 );
     // }
@@ -206,13 +197,7 @@ function drawMonkeyRoom(){
           mat4.scale( modelMatrix, [2,2,2] )
           // mat4.translate( app.mvMatrix, -app.camera.inversePosition );
           // console.log(app.)
-          mat4.scale(modelMatrix,[i.size,i.size,i.size]);
-          mat4.translate( modelMatrix, [i.x, i.y, i.z] );
-          mat4.rotate( modelMatrix, degToRad( 90-i.theta ), [0,1,0] );
-          mat4.rotate( modelMatrix, degToRad( -i.phi ), [1,0,0] );
           // console.log([i.x, i.y, i.z]);
-          app.mvMatrix = mat4.identity();
-          mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
           // mat4.rotate( app.mvMatrix, degToRad( i.phi ), [1,0,0] );
           i.y += i.v*Math.sin(degToRad(i.phi))
           i.x += i.v*Math.cos(degToRad(i.phi))*Math.cos(degToRad(i.theta))
@@ -229,11 +214,11 @@ function drawMonkeyRoom(){
             i.theta -= dirchangespeed
           }
 
-          if(i.y >= 2.5)
+          if(i.y >= 5)
           {
             i.phi -= dirchangespeed/2
           }
-          if(i.y < 1.5)
+          if(i.y < 3.5)
           {
             i.phi += dirchangespeed/2
           }
@@ -246,7 +231,56 @@ function drawMonkeyRoom(){
           //   console.log(i);
           // }
           gl.uniform3fv( shaderProgram.lightSpecularColor, lightIntesity( 0.05, 0.0, 0.0, 0.01 ) );
-          drawObject( app.models.fish1, 100, [0.0,0.0,0.0,0.0] );
+          if(i.type == 0)
+          {
+            mat4.scale(modelMatrix,[i.size,i.size,i.size]);
+            mat4.translate( modelMatrix, [i.x, i.y, i.z] );
+            mat4.rotate( modelMatrix, degToRad( 90-i.theta ), [0,1,0] );
+            mat4.rotate( modelMatrix, degToRad( -i.phi ), [1,0,0] );
+            app.mvMatrix = mat4.identity();
+            mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
+            drawObject( app.models.fish1, 100, [0.0,0.0,0.0,0.0] );
+          }
+          else if(i.type == 1)
+          {
+            mat4.scale(modelMatrix,[codfish_coeff*i.size,codfish_coeff*i.size,codfish_coeff*i.size]);
+            mat4.translate( modelMatrix, [i.x, i.y, i.z] );
+            mat4.rotate( modelMatrix, degToRad( 90-i.theta ), [0,1,0] );
+            mat4.rotate( modelMatrix, degToRad( -i.phi ), [1,0,0] );
+            app.mvMatrix = mat4.identity();
+            mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
+            drawObject( app.models.fish2, 100, [0.0,0.0,0.0,0.0] );
+          }
+          else if(i.type == 2)
+          {
+            mat4.scale(modelMatrix,[goldfish_coeff*i.size,goldfish_coeff*i.size,goldfish_coeff*i.size]);
+            mat4.translate( modelMatrix, [i.x, i.y, i.z] );
+            mat4.rotate( modelMatrix, degToRad( 90-i.theta ), [0,1,0] );
+            mat4.rotate( modelMatrix, degToRad( -i.phi ), [1,0,0] );
+            app.mvMatrix = mat4.identity();
+            mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
+            drawObject( app.models.fish3, 100, [0.0,0.0,0.0,0.0] );
+          }
+          else if(i.type == 3)
+          {
+            mat4.scale(modelMatrix,[orca_coeff*i.size,orca_coeff*i.size,orca_coeff*i.size]);
+            mat4.translate( modelMatrix, [i.x, i.y, i.z] );
+            mat4.rotate( modelMatrix, degToRad( 90-i.theta ), [0,1,0] );
+            mat4.rotate( modelMatrix, degToRad( -i.phi ), [1,0,0] );
+            app.mvMatrix = mat4.identity();
+            mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
+            drawObject( app.models.fish4, 100, [0.0,0.0,0.0,0.0] );
+          }
+          else if(i.type == 4)
+          {
+            mat4.scale(modelMatrix,[dolphin_coeff*i.size,dolphin_coeff*i.size,dolphin_coeff*i.size]);
+            mat4.translate( modelMatrix, [i.x, i.y, i.z] );
+            mat4.rotate( modelMatrix, degToRad( 90-i.theta ), [0,1,0] );
+            mat4.rotate( modelMatrix, degToRad( -i.phi ), [1,0,0] );
+            app.mvMatrix = mat4.identity();
+            mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
+            drawObject( app.models.fish5, 100, [0.0,0.0,0.0,0.0] );
+          }
           mvPopMatrix();
         }
       }
@@ -281,7 +315,7 @@ function drawMonkeyRoom(){
         // console.log(i.y);
         drawObject( app.models.egg, 100, [1.0,1.0,1.0,1.0] );
         mvPopMatrix();
-
+        
       }
 
 

@@ -159,6 +159,7 @@ function cameraMove() {
   }
   else if(app.cameramode == 1)
   {
+    console.log(fishselect);
     app.camera.position[ X ] = 0.5 + (fish[fishselect].x - fish[fishselect].x/4)/4;
     app.camera.position[ Y ] = 0.5 + fish[fishselect].y/4;
     app.camera.position[ Z ] = 0.5 + (fish[fishselect].z - fish[fishselect].z/4)/4;
