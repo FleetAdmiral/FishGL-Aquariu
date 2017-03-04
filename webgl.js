@@ -58,6 +58,7 @@ window.onload = function(){
       'codfish': 'models/codfish.obj',
       'goldfish': 'models/goldfish.obj',
       'orca': 'models/orca.obj',
+      'dolphin': 'models/dolphin.obj',
     },
     webGLStart
   );
