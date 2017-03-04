@@ -78,8 +78,23 @@ function cameraKeyDownHandler( e ){
     app.camera.speed = app.camera.runSpeed;
   }
   // f
-  if( e.which === 70 ){
-    app.hasFlashlight = !app.hasFlashlight;
+  if( e.which === 67 ){
+    app.cameramode = (app.cameramode+1)%3;
+  }
+
+  if( e.which === 88 ){
+    fishselect = (fishselect + 1)%nfish
+  }
+
+  if( e.which === 90 ){
+    fishselect = (fishselect - 1 + nfish)%nfish
+  }
+
+  if( e.which === 72 ){
+    // eggs.push({x: 4*fish[fishselect].x, y: 4*fish[fishselect].y, z: 4*fish[fishselect].z, vx: 0, vy: 0.05, vz: 0,type: fish[fishselect].type});
+    eggs.push({x: 4*fish[fishselect].x, y: 4*fish[fishselect].y, z: 4*fish[fishselect].z, vx: 4*fish[fishselect].x/((4*fish[fishselect].y-0.2)/0.05), vy: 0.05, vz: 4*fish[fishselect].z/((4*fish[fishselect].y-0.2)/0.05),type: fish[fishselect].type});
+    console.log(fishselect);
+    // fishselect++
   }
   // e
   if( e.which === 69  && !app.animate && vec3.length( app.camera.position ) < 1 ){
@@ -100,43 +115,53 @@ function cameraShake(){
   app.camera.pitch += app.camera.shakeAmplitude * Math.sin( app.camera.shakeTimer * app.camera.shakeFrequency );
 }
 
-function cameraMove(){
+function cameraMove() {
   var distance = app.elapsed * app.camera.speed;
   var camX = 0, camY = 0, camZ = 0;
-  var pitchFactor = 1;//Math.cos( degToRad( app.camera.pitch ) );
-  // forward
-  if( app.keys.pressed[ app.keys.W ] ){
-    camX += distance * Math.sin( degToRad( app.camera.heading ) ) * pitchFactor;
-    camY += distance * Math.sin( degToRad( app.camera.pitch ) ) * pitchFactor * -1.0
-    camZ += distance * Math.cos( degToRad( app.camera.heading ) ) * pitchFactor * -1.0;
+  if(app.cameramode == 0)
+  {
+    var pitchFactor = 1;//Math.cos( degToRad( app.camera.pitch ) );
+    // forward
+    if( app.keys.pressed[ app.keys.W ] ){
+      camX += distance * Math.sin( degToRad( app.camera.heading ) ) * pitchFactor;
+      camY += distance * Math.sin( degToRad( app.camera.pitch ) ) * pitchFactor * -1.0
+      camZ += distance * Math.cos( degToRad( app.camera.heading ) ) * pitchFactor * -1.0;
+    }
+    // backward
+    if( app.keys.pressed[ app.keys.S ] ){
+      camX += distance * Math.sin( degToRad( app.camera.heading ) ) * pitchFactor * -1.0;
+      camZ += distance * Math.cos( degToRad( app.camera.heading ) ) * pitchFactor;
+      camY += distance * Math.sin( degToRad( app.camera.pitch ) ) * pitchFactor
+    }
+    // strafing right
+    if( app.keys.pressed[ app.keys.D ] ){
+      camX += distance * Math.cos( degToRad( app.camera.heading ) );
+      camZ += distance * Math.sin( degToRad( app.camera.heading ) );
+    }
+    // strafing left
+    if( app.keys.pressed[ app.keys.A ] ){
+      camX += -distance * Math.cos( degToRad( app.camera.heading ) );
+      camZ += -distance * Math.sin( degToRad( app.camera.heading ) );
+    }
+
+    if( camX > distance )
+      camX = distance;
+    if( camX < -distance )
+      camX = -distance;
+    if( camZ > distance )
+      camZ = distance;
+    if( camZ < -distance )
+      camZ = -distance;
+
+    app.camera.position[ X ] += camX;
+    app.camera.position[ Y ] += camY;
+    app.camera.position[ Z ] += camZ;
   }
-  // backward
-  if( app.keys.pressed[ app.keys.S ] ){
-    camX += distance * Math.sin( degToRad( app.camera.heading ) ) * pitchFactor * -1.0;
-    camZ += distance * Math.cos( degToRad( app.camera.heading ) ) * pitchFactor;
-    camY += distance * Math.sin( degToRad( app.camera.pitch ) ) * pitchFactor
-  }
-  // strafing right
-  if( app.keys.pressed[ app.keys.D ] ){
-    camX += distance * Math.cos( degToRad( app.camera.heading ) );
-    camZ += distance * Math.sin( degToRad( app.camera.heading ) );
-  }
-  // strafing left
-  if( app.keys.pressed[ app.keys.A ] ){
-    camX += -distance * Math.cos( degToRad( app.camera.heading ) );
-    camZ += -distance * Math.sin( degToRad( app.camera.heading ) );
+  else if(app.cameramode == 1)
+  {
+    app.camera.position[ X ] = 0.5 + (fish[fishselect].x - fish[fishselect].x/4)/4;
+    app.camera.position[ Y ] = 0.5 + fish[fishselect].y/4;
+    app.camera.position[ Z ] = 0.5 + (fish[fishselect].z - fish[fishselect].z/4)/4;
   }
 
-  if( camX > distance )
-    camX = distance;
-  if( camX < -distance )
-    camX = -distance;
-  if( camZ > distance )
-    camZ = distance;
-  if( camZ < -distance )
-    camZ = -distance;
-
-  app.camera.position[ X ] += camX;
-  app.camera.position[ Y ] += camY;
-  app.camera.position[ Z ] += camZ;
 }

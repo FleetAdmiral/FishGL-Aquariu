@@ -49,10 +49,11 @@ window.onload = function(){
       'room_tunnel_walls': 'models/room_tunnel_walls.obj',
       'room_wall_broken': 'models/room_wall_broken.obj',
       'room_wall_unbroken': 'models/room_wall_unbroken.obj',
-      'suzanne': 'models/suzanne12.obj',
+      'fish1': 'models/fish1.obj',
       'pedestal': 'models/pedestal.obj',
       'boulder': 'models/boulder.obj',
       'seaweed': 'models/seaweed.obj',
+      'egg': 'models/egg.obj'
     },
     webGLStart
   );
