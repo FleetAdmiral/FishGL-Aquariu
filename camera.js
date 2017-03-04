@@ -30,8 +30,8 @@ function fullscreenChange() {
     gl.viewportHeight = canvas.height = window.innerHeight;
   }
   else{
-    gl.viewportWidth = canvas.width = 700;
-    gl.viewportHeight = canvas.height = 700;
+    gl.viewportWidth = canvas.width = 500;
+    gl.viewportHeight = canvas.height = 500;
   }
 }
 
@@ -60,15 +60,15 @@ function moveCallback( e ){
 
   app.camera.heading += movementX / app.camera.sensitivity;
   app.camera.pitch += movementY / app.camera.sensitivity;
-
+  // app.camera.roll += movementZ / app.camera.sen
     if( app.camera.pitch < -90 )
       app.camera.pitch = -90;
     if( app.camera.pitch > 90 )
       app.camera.pitch = 90;
     if( app.camera.heading < -180 )
       app.camera.heading += 360
-    if( app.camera.heading > 180 )
-      app.camera.heading -= 360
+    // if( app.camera.heading > 180 )
+    //   app.camera.heading -= 360
   }
 }
 
@@ -88,7 +88,6 @@ function cameraKeyDownHandler( e ){
 }
 
 function cameraKeyUpHandler( e ){
-  //alert("Hello");
   app.keys.pressed[ e.which ] = false;
   if( e.which == 16 ){
     app.camera.speed = app.camera.walkSpeed;

@@ -5,7 +5,7 @@ function drawObject( model, shininess, color ){
     as well as the shaderProgram has a uniform attribute called "samplerUniform"
   */
   gl.useProgram( shaderProgram );
-  
+
   gl.bindBuffer(gl.ARRAY_BUFFER, model.mesh.vertexBuffer);
   gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, model.mesh.vertexBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
@@ -25,7 +25,7 @@ function drawObject( model, shininess, color ){
     gl.uniform1i(shaderProgram.hasTexure, false);
     gl.uniform4fv( shaderProgram.modelColor, color );
   }
-  
+
   if( shininess ){
     gl.uniform1f( shaderProgram.materialShininessUniform, shininess );
   }
@@ -50,20 +50,20 @@ function drawParticles( particles ){
 
   gl.bindBuffer(gl.ARRAY_BUFFER, particles.vectorsBuffer);
   gl.vertexAttribPointer(particleShaderProgram.particleVector, particles.vectorsBuffer.itemSize, gl.FLOAT, false, 0, 0);
-  
+
   gl.bindBuffer(gl.ARRAY_BUFFER, particles.ttlBuffer);
   gl.vertexAttribPointer(particleShaderProgram.particleTTL, particles.ttlBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
   gl.activeTexture(gl.TEXTURE0);
   gl.bindTexture(gl.TEXTURE_2D, particles.texture);
   gl.uniform1i(particleShaderProgram.samplerUniform, 0);
-  
+
   gl.uniform1f( particleShaderProgram.time, ( app.timeNow - app.startAnimateTime ) / app.particles.rate );
   gl.uniformMatrix4fv(particleShaderProgram.pMatrixUniform, false, app.pMatrix);
   gl.uniformMatrix4fv(particleShaderProgram.mvMatrixUniform, false, app.mvMatrix);
 
   gl.drawArrays(gl.POINTS, 0, particles.locationsBuffer.numItems);
-  
+
   gl.disable(gl.BLEND);
   gl.enable(gl.DEPTH_TEST);
 }
@@ -96,9 +96,9 @@ function lightIntesity( i, r, g, b){
 }
 
 function setUniforms(){
-  gl.uniform3fv( shaderProgram.ambientColorUniform, lightIntesity( app.ambientIntensity, 0.3, 0.3, 0.3 ) );
-  gl.uniform3fv( shaderProgram.lightSpecularColor, lightIntesity( 0.5, 1.0, 1.0, 1.0 ) );
-  gl.uniform3fv( shaderProgram.lightDiffuseColor, lightIntesity( app.diffuseIntensity, 1.0, 1.0, 1.0 ) );
+  gl.uniform3fv( shaderProgram.ambientColorUniform, lightIntesity( app.ambientIntensity, 0.0, 0.0, 0.6 ) );
+  gl.uniform3fv( shaderProgram.lightSpecularColor, lightIntesity( 0.5, 0.0, 0.0, 1.0 ) );
+  gl.uniform3fv( shaderProgram.lightDiffuseColor, lightIntesity( app.diffuseIntensity, 0.0, 0.0, 1.0 ) );
   gl.uniform1i( shaderProgram.hasFlashlight, app.hasFlashlight );
 }
 

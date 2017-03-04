@@ -5,6 +5,30 @@
  * @version 1.3.7
  */
 
+/*
+ * Copyright (c) 2012 Brandon Jones, Colin MacKenzie IV
+ *
+ * This software is provided 'as-is', without any express or implied
+ * warranty. In no event will the authors be held liable for any damages
+ * arising from the use of this software.
+ *
+ * Permission is granted to anyone to use this software for any purpose,
+ * including commercial applications, and to alter it and redistribute it
+ * freely, subject to the following restrictions:
+ *
+ *    1. The origin of this software must not be misrepresented; you must not
+ *    claim that you wrote the original software. If you use this software
+ *    in a product, an acknowledgment in the product documentation would be
+ *    appreciated but is not required.
+ *
+ *    2. Altered source versions must be plainly marked as such, and must not
+ *    be misrepresented as being the original software.
+ *
+ *    3. This notice may not be removed or altered from any source
+ *    distribution.
+ */
+
+// Updated to use a modification of the "returnExportsGlobal" pattern from https://github.com/umdjs/umd
 
 (function (root, factory) {
     if (typeof exports === 'object') {
@@ -64,7 +88,7 @@
      * @name MatrixArray
      */
     var MatrixArray = null;
-
+    
     // explicitly sets and returns the type of array to use within glMatrix
     function setMatrixArrayType(type) {
         MatrixArray = type;
@@ -77,7 +101,7 @@
         MatrixArray = (typeof Float32Array !== 'undefined') ? Float32Array : Array;
         return MatrixArray;
     }
-
+    
     determineMatrixArrayType();
 
     /**
@@ -85,7 +109,7 @@
      * @name vec3
      */
     var vec3 = {};
-
+     
     /**
      * Creates a new instance of a vec3 using the default array type
      * Any javascript array-like objects containing at least 3 numeric elements can serve as a vec3
@@ -423,7 +447,7 @@
         var x = vec2[0] - vec[0],
             y = vec2[1] - vec[1],
             z = vec2[2] - vec[2];
-
+            
         return Math.sqrt(x*x + y*y + z*z);
     };
 
@@ -451,22 +475,22 @@
 
         var m = unprojectMat;
         var v = unprojectVec;
-
+        
         v[0] = (vec[0] - viewport[0]) * 2.0 / viewport[2] - 1.0;
         v[1] = (vec[1] - viewport[1]) * 2.0 / viewport[3] - 1.0;
         v[2] = 2.0 * vec[2] - 1.0;
         v[3] = 1.0;
-
+        
         mat4.multiply(proj, view, m);
         if(!mat4.inverse(m)) { return null; }
-
+        
         mat4.multiplyVec4(m, v);
         if(v[3] === 0.0) { return null; }
 
         dest[0] = v[0] / v[3];
         dest[1] = v[1] / v[3];
         dest[2] = v[2] / v[3];
-
+        
         return dest;
     };
 
@@ -486,7 +510,7 @@
      */
     vec3.rotationTo = function (a, b, dest) {
         if (!dest) { dest = quat4.create(); }
-
+        
         var d = vec3.dot(a, b);
         var axis = tmpvec3;
         if (d >= 1.0) {
@@ -645,7 +669,7 @@
         dest[8] = (a11 * a00 - a01 * a10) * id;
         return dest;
     };
-
+    
     /**
      * Performs a matrix multiplication
      *
@@ -657,7 +681,7 @@
      */
     mat3.multiply = function (mat, mat2, dest) {
         if (!dest) { dest = mat; }
-
+        
 
         // Cache the matrix values (makes for huge speed increases!)
         var a00 = mat[0], a01 = mat[1], a02 = mat[2],
@@ -715,7 +739,7 @@
       dest[0] = x * matrix[0] + y * matrix[3] + z * matrix[6];
       dest[1] = x * matrix[1] + y * matrix[4] + z * matrix[7];
       dest[2] = x * matrix[2] + y * matrix[5] + z * matrix[8];
-
+      
       return dest;
     };
 
@@ -1278,7 +1302,7 @@
         var a30 = mat[12], a31 = mat[13], a32 = mat[14], a33 = mat[15];
 
         // Cache only the current line of the second matrix
-        var b0  = mat2[0], b1 = mat2[1], b2 = mat2[2], b3 = mat2[3];
+        var b0  = mat2[0], b1 = mat2[1], b2 = mat2[2], b3 = mat2[3];  
         dest[0] = b0*a00 + b1*a10 + b2*a20 + b3*a30;
         dest[1] = b0*a01 + b1*a11 + b2*a21 + b3*a31;
         dest[2] = b0*a02 + b1*a12 + b2*a22 + b3*a32;
@@ -1892,7 +1916,7 @@
         dest[13] = vec[1];
         dest[14] = vec[2];
         dest[15] = 1;
-
+        
         return dest;
     };
 
@@ -2060,9 +2084,9 @@
         var q0 = quat[0], q1 = quat[1], q2 = quat[2], q3 = quat[3],
             dot = q0*q0 + q1*q1 + q2*q2 + q3*q3,
             invDot = dot ? 1.0/dot : 0;
-
+        
         // TODO: Would be faster to return [0,0,0,0] immediately if dot == 0
-
+        
         if(!dest || quat === dest) {
             quat[0] *= -invDot;
             quat[1] *= -invDot;
@@ -2397,7 +2421,7 @@
      */
     quat4.fromRotationMatrix = function(mat, dest) {
         if (!dest) dest = quat4.create();
-
+        
         // Algorithm in Ken Shoemake's article in 1987 SIGGRAPH course notes
         // article "Quaternion Calculus and Fast Animation".
 
@@ -2422,7 +2446,7 @@
               i = 2;
             var j = s_iNext[i];
             var k = s_iNext[j];
-
+            
             fRoot = Math.sqrt(mat[i*3+i]-mat[j*3+j]-mat[k*3+k] + 1.0);
             dest[i] = 0.5 * fRoot;
             fRoot = 0.5 / fRoot;
@@ -2430,7 +2454,7 @@
             dest[j] = (mat[j*3+i] + mat[i*3+j]) * fRoot;
             dest[k] = (mat[k*3+i] + mat[i*3+k]) * fRoot;
         }
-
+        
         return dest;
     };
 
@@ -2441,7 +2465,7 @@
 
     (function() {
         var mat = mat3.create();
-
+        
         /**
          * Creates a quaternion from the 3 given vectors. They must be perpendicular
          * to one another and represent the X, Y and Z axes.
@@ -2509,14 +2533,14 @@
         // The quaternion representing the rotation is
         //   q = cos(A/2)+sin(A/2)*(x*i+y*j+z*k)
         if (!dest) dest = quat4.create();
-
+        
         var half = angle * 0.5;
         var s = Math.sin(half);
         dest[3] = Math.cos(half);
         dest[0] = s * axis[0];
         dest[1] = s * axis[1];
         dest[2] = s * axis[2];
-
+        
         return dest;
     };
 
@@ -2552,7 +2576,7 @@
             dest[1] = 0;
             dest[2] = 0;
         }
-
+        
         return dest;
     };
 
@@ -2566,13 +2590,13 @@
     quat4.str = function (quat) {
         return '[' + quat[0] + ', ' + quat[1] + ', ' + quat[2] + ', ' + quat[3] + ']';
     };
-
+    
     /**
      * @class 2 Dimensional Vector
      * @name vec2
      */
     var vec2 = {};
-
+     
     /**
      * Creates a new vec2, initializing it from vec if vec
      * is given.
@@ -2609,7 +2633,7 @@
 
         return dest;
     };
-
+    
     /**
      * Adds the vec2's together. If dest is given, the result
      * is stored there. Otherwise, the result is stored in vecB.
@@ -2625,7 +2649,7 @@
         dest[1] = vecA[1] + vecB[1];
         return dest;
     };
-
+    
     /**
      * Subtracts vecB from vecA. If dest is given, the result
      * is stored there. Otherwise, the result is stored in vecB.
@@ -2641,7 +2665,7 @@
         dest[1] = vecA[1] - vecB[1];
         return dest;
     };
-
+    
     /**
      * Multiplies vecA with vecB. If dest is given, the result
      * is stored there. Otherwise, the result is stored in vecB.
@@ -2657,7 +2681,7 @@
         dest[1] = vecA[1] * vecB[1];
         return dest;
     };
-
+    
     /**
      * Divides vecA by vecB. If dest is given, the result
      * is stored there. Otherwise, the result is stored in vecB.
@@ -2673,7 +2697,7 @@
         dest[1] = vecA[1] / vecB[1];
         return dest;
     };
-
+    
     /**
      * Scales vecA by some scalar number. If dest is given, the result
      * is stored there. Otherwise, the result is stored in vecA.
@@ -2802,7 +2826,7 @@
         dest[2] = z;
         return dest;
     };
-
+    
     /**
      * Caclulates the length of a vec2
      *
@@ -2838,7 +2862,7 @@
     vec2.dot = function (vecA, vecB) {
         return vecA[0] * vecB[0] + vecA[1] * vecB[1];
     };
-
+    
     /**
      * Generates a 2D unit vector pointing from one vector to another
      *
@@ -2895,13 +2919,13 @@
     vec2.str = function (vec) {
         return '[' + vec[0] + ', ' + vec[1] + ']';
     };
-
+    
     /**
      * @class 2x2 Matrix
      * @name mat2
      */
     var mat2 = {};
-
+    
     /**
      * Creates a new 2x2 matrix. If src is given, the new matrix
      * is initialized to those values.
@@ -2911,7 +2935,7 @@
      */
     mat2.create = function(src) {
         var dest = new MatrixArray(4);
-
+        
         if (src) {
             dest[0] = src[0];
             dest[1] = src[1];
@@ -2943,7 +2967,7 @@
 
         return dest;
     };
-
+    
     /**
      * Copies the values of one mat2 to another
      *
@@ -3009,7 +3033,7 @@
             mat[2] = a00;
             return mat;
         }
-
+        
         dest[0] = mat[0];
         dest[1] = mat[2];
         dest[2] = mat[1];
@@ -3027,7 +3051,7 @@
     mat2.determinant = function (mat) {
       return mat[0] * mat[3] - mat[2] * mat[1];
     };
-
+    
     /**
      * Calculates the inverse matrix of a mat2
      *
@@ -3041,7 +3065,7 @@
         var a0 = mat[0], a1 = mat[1], a2 = mat[2], a3 = mat[3];
         var det = a0 * a3 - a2 * a1;
         if (!det) return null;
-
+        
         det = 1.0 / det;
         dest[0] =  a3 * det;
         dest[1] = -a1 * det;
@@ -3049,7 +3073,7 @@
         dest[3] =  a0 * det;
         return dest;
     };
-
+    
     /**
      * Performs a matrix multiplication
      *
@@ -3112,7 +3136,7 @@
       dest[1] = x * matrix[2] + y * matrix[3];
       return dest;
     };
-
+    
     /**
      * Scales the mat2 by the dimensions in the given vec2
      *
@@ -3147,13 +3171,13 @@
     mat2.str = function (mat) {
         return '[' + mat[0] + ', ' + mat[1] + ', ' + mat[2] + ', ' + mat[3] + ']';
     };
-
+    
     /**
      * @class 4 Dimensional Vector
      * @name vec4
      */
     var vec4 = {};
-
+     
     /**
      * Creates a new vec4, initializing it from vec if vec
      * is given.
@@ -3163,7 +3187,7 @@
      */
     vec4.create = function(vec) {
         var dest = new MatrixArray(4);
-
+        
         if (vec) {
             dest[0] = vec[0];
             dest[1] = vec[1];
@@ -3198,7 +3222,7 @@
 
         return dest;
     };
-
+    
     /**
      * Adds the vec4's together. If dest is given, the result
      * is stored there. Otherwise, the result is stored in vecB.
@@ -3216,7 +3240,7 @@
       dest[3] = vecA[3] + vecB[3];
       return dest;
     };
-
+    
     /**
      * Subtracts vecB from vecA. If dest is given, the result
      * is stored there. Otherwise, the result is stored in vecB.
@@ -3234,7 +3258,7 @@
       dest[3] = vecA[3] - vecB[3];
       return dest;
     };
-
+    
     /**
      * Multiplies vecA with vecB. If dest is given, the result
      * is stored there. Otherwise, the result is stored in vecB.
@@ -3252,7 +3276,7 @@
       dest[3] = vecA[3] * vecB[3];
       return dest;
     };
-
+    
     /**
      * Divides vecA by vecB. If dest is given, the result
      * is stored there. Otherwise, the result is stored in vecB.
@@ -3270,7 +3294,7 @@
       dest[3] = vecA[3] / vecB[3];
       return dest;
     };
-
+    
     /**
      * Scales vecA by some scalar number. If dest is given, the result
      * is stored there. Otherwise, the result is stored in vecA.
