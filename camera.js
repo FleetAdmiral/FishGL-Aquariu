@@ -93,6 +93,8 @@ function cameraKeyDownHandler( e ){
   if( e.which === 72 ){
     // eggs.push({x: 4*fish[fishselect].x, y: 4*fish[fishselect].y, z: 4*fish[fishselect].z, vx: 0, vy: 0.05, vz: 0,type: fish[fishselect].type});
     eggs.push({x: 4*fish[fishselect].x, y: 4*fish[fishselect].y, z: 4*fish[fishselect].z, vx: 4*fish[fishselect].x/((4*fish[fishselect].y-0.2)/0.05), vy: 0.05, vz: 4*fish[fishselect].z/((4*fish[fishselect].y-0.2)/0.05),type: fish[fishselect].type});
+    var audio = new Audio('sounds/drop.mp3');
+    audio.play();
     console.log(fishselect);
     // fishselect++
   }

@@ -23,6 +23,8 @@ function webGLStart( meshes ) {
   app.meshes = meshes;
   canvas = document.getElementById("mycanvas");
   initGL(canvas);
+  var audio = new Audio('sounds/mainsounds.mp3');
+  audio.play();
   initShaders();
   initBuffers();
   // initTunnel();
