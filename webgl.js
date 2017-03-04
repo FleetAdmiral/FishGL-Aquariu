@@ -53,10 +53,11 @@ window.onload = function(){
       'pedestal': 'models/pedestal.obj',
       'boulder': 'models/boulder.obj',
       'seaweed': 'models/seaweed.obj',
-
       'egg': 'models/egg.obj',
       'pebble': 'models/pebble.obj',
-
+      'codfish': 'models/codfish.obj',
+      'goldfish': 'models/goldfish.obj',
+      'orca': 'models/orca.obj',
     },
     webGLStart
   );

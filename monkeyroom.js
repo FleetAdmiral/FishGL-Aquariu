@@ -141,9 +141,46 @@ function drawMonkeyRoom(){
     mvPushMatrix();
     mat4.scale( modelMatrix, [0.01,0.01,0.01] );
     mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
+    mat4.translate( modelMatrix, [2,5,4] );
+    mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
+    drawObject( app.models.codfish, 0);
+    mat4.scale( modelMatrix, [100,100,100] );
+    mvPopMatrix();
+
+    mvPushMatrix();
+    mat4.scale( modelMatrix, [0.01,0.01,0.01] );
+    mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
+    mat4.translate( modelMatrix, [2,8,4] );
+    mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
+    drawObject( app.models.orca, 0);
+    mat4.scale( modelMatrix, [100,100,100] );
+    mvPopMatrix();
+
+    mvPushMatrix();
+    mat4.scale( modelMatrix, [0.01,0.01,0.01] );
+    mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
+    mat4.translate( modelMatrix, [2,10,4] );
+    mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
+    drawObject( app.models.goldfish, 0);
+    mat4.scale( modelMatrix, [100,100,100] );
+    mvPopMatrix();
+
+
+    mvPushMatrix();
+    mat4.scale( modelMatrix, [0.01,0.01,0.01] );
+    mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
+    mat4.translate( modelMatrix, [2,200,4] );
+    mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
+    drawObject( app.models.goldfish, 0);
+    mat4.scale( modelMatrix, [100,100,100] );
+    mvPopMatrix();
+
+    mvPushMatrix();
+    mat4.scale( modelMatrix, [0.01,0.01,0.01] );
+    mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
     mat4.translate( modelMatrix, [14,0,4] );
     mat4.multiply(viewMatrix, modelMatrix, app.mvMatrix)
-    drawObject( app.models.pebble, 100, [0,1,1]);
+    drawObject( app.models.pebble, 0, [1,1,1]);
     mat4.scale( modelMatrix, [100,100,100] );
     mvPopMatrix();
     // if( !app.breakWalls ){
