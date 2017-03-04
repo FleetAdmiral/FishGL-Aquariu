@@ -9,6 +9,7 @@ var canvas;
 // application var holder
 var app = {};
   // mesh holder
+  app.cameramode = 0
   app.meshes = {};
   // model holder
   app.models = {};

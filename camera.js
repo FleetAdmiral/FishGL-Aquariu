@@ -102,17 +102,19 @@ function cameraShake(){
 
 function cameraMove(){
   var distance = app.elapsed * app.camera.speed;
-  var camX = 0, camZ = 0;
+  var camX = 0, camY = 0, camZ = 0;
   var pitchFactor = 1;//Math.cos( degToRad( app.camera.pitch ) );
   // forward
   if( app.keys.pressed[ app.keys.W ] ){
     camX += distance * Math.sin( degToRad( app.camera.heading ) ) * pitchFactor;
+    camY += distance * Math.sin( degToRad( app.camera.pitch ) ) * pitchFactor * -1.0
     camZ += distance * Math.cos( degToRad( app.camera.heading ) ) * pitchFactor * -1.0;
   }
   // backward
   if( app.keys.pressed[ app.keys.S ] ){
     camX += distance * Math.sin( degToRad( app.camera.heading ) ) * pitchFactor * -1.0;
     camZ += distance * Math.cos( degToRad( app.camera.heading ) ) * pitchFactor;
+    camY += distance * Math.sin( degToRad( app.camera.pitch ) ) * pitchFactor
   }
   // strafing right
   if( app.keys.pressed[ app.keys.D ] ){
@@ -135,5 +137,6 @@ function cameraMove(){
     camZ = -distance;
 
   app.camera.position[ X ] += camX;
+  app.camera.position[ Y ] += camY;
   app.camera.position[ Z ] += camZ;
 }
